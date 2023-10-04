@@ -1,6 +1,6 @@
 image: /home/usuario/Documentos/GitHub/IR2121/Worlds/TD_n1.png
 mode: trinary
-resolution: 0.0159
+resolution: 0.0254
 origin: [-41.5,-28, 0]
 negate: 0
 occupied_thresh: 0.65
