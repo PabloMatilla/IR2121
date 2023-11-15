@@ -20,6 +20,7 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
     goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
 
     publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
