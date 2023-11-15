@@ -14,6 +14,13 @@ int main(int argc, char * argv[])
   rclcpp::WallRate loop_rate(500ms);
 
   while (rclcpp::ok()) {
+    goal_pose_message.pose.position.x = 1;
+    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 1;
+    goal_pose_message.pose.orientation.y = 1;
+    goal_pose_message.pose.orientation.z = 0;
+
     publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
