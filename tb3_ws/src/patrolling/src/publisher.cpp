@@ -12,6 +12,9 @@ double x_init, y_init, ang_init;
 double x, y;
 double ang;
 
+double pos_x_1, pos_x_2, pos_x_3, pos_x_4;
+double pos_y_1, pos_y_2, pos_y_3, pos_y_4;
+
 void topic_callback(const nav_msgs::msg::Odometry::SharedPtr msg) {
     // Obtener la posición x y y
     x = msg->pose.pose.position.x;
@@ -41,16 +44,14 @@ int main(int argc, char * argv[])
   auto node = rclcpp::Node::make_shared("publisher");
 
   auto subscription = node->create_subscription<nav_msgs::msg::Odometry>("odom", 10, topic_callback);
-  /*
-  node->declare_parameter("pose_goal", [1, 2, 3, 4]);
-  double goal = node->get_parameter("goal_pose").get_parameter_value().get<list<int>>();
-  */
 
   auto publisher = node->create_publisher<geometry_msgs::msg::PoseStamped>("goal_pose", 10);
   geometry_msgs::msg::PoseStamped goal_pose_message;
   rclcpp::WallRate loop_rate(500ms);
 
-  while (rclcpp::ok()) {
+  bool flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0;
+
+  while (rclcpp::ok() and flag1) {
     goal_pose_message.pose.position.x = 1;
     goal_pose_message.pose.position.y = 1;
     goal_pose_message.pose.position.z = 0;
@@ -59,10 +60,69 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
 
+    if (int(x) == 1 and int(y) == 1){
+      flag1 = 0;
+      flag2 = 1;
+    }
     publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
   }
+
+  while (rclcpp::ok() and flag2) {
+    goal_pose_message.pose.position.x = 1;
+    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 1;
+    goal_pose_message.pose.orientation.y = 1;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+
+    if (int(x) == 1 and int(y) == 1){
+      flag2 = 0;
+      flag3 = 1;
+    }
+    publisher->publish(goal_pose_message);
+    rclcpp::spin_some(node);
+    loop_rate.sleep();
+  }
+
+  while (rclcpp::ok() and flag3) {
+    goal_pose_message.pose.position.x = 1;
+    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 1;
+    goal_pose_message.pose.orientation.y = 1;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+
+    if (int(x) == 1 and int(y) == 1){
+      flag3 = 0;
+      flag4 = 1;
+    }
+    publisher->publish(goal_pose_message);
+    rclcpp::spin_some(node);
+    loop_rate.sleep();
+  }
+
+  while (rclcpp::ok() and flag4) {
+    goal_pose_message.pose.position.x = 1;
+    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 1;
+    goal_pose_message.pose.orientation.y = 1;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+
+    if (int(x) == 1 and int(y) == 1){
+      flag4 = 0;
+    }
+    publisher->publish(goal_pose_message);
+    rclcpp::spin_some(node);
+    loop_rate.sleep();
+  }
+  
+
   rclcpp::shutdown();
   return 0;
 }
