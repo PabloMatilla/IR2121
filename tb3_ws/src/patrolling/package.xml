@@ -3,7 +3,7 @@
 <package format="2">
   <name>patrolling</name>
   <version>0.0.1</version>
-  <description>Examples of topics publisher and subscriber</description>
+  <description>Code goal_pose for SLAM</description>
 
   <maintainer email="al415550@uji.es">Pablo Exposito</maintainer>
 
