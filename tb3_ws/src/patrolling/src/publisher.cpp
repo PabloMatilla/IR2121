@@ -50,6 +50,7 @@ int main(int argc, char * argv[])
   rclcpp::WallRate loop_rate(500ms);
 
   bool flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0;
+  float error = 0.7;
 
   while (rclcpp::ok() and flag1) {
     goal_pose_message.pose.position.x = 1;
@@ -60,7 +61,7 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
 
-    if (int(x) == 1 and int(y) == 1){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag1 = 0;
       flag2 = 1;
     }
@@ -78,7 +79,7 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
 
-    if (int(x) == 1 and int(y) == 1){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag2 = 0;
       flag3 = 1;
     }
@@ -96,7 +97,7 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
 
-    if (int(x) == 1 and int(y) == 1){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag3 = 0;
       flag4 = 1;
     }
@@ -114,7 +115,7 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
 
-    if (int(x) == 1 and int(y) == 1){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag4 = 0;
     }
     publisher->publish(goal_pose_message);
@@ -126,4 +127,3 @@ int main(int argc, char * argv[])
   rclcpp::shutdown();
   return 0;
 }
-
