@@ -1,5 +1,4 @@
 #include <chrono>
-#include <unistd.h>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
@@ -7,25 +6,35 @@
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 
-// Este codigo esta disenado para actuar en los aldrededores de la clase de Robotica.
-
 using namespace std::chrono_literals;
 
+double x_init, y_init, ang_init;
 double x, y;
-double x_ang, y_ang, z_ang;
+double ang;
 
 double pos_x_1, pos_x_2, pos_x_3, pos_x_4;
 double pos_y_1, pos_y_2, pos_y_3, pos_y_4;
 
 void topic_callback(const nav_msgs::msg::Odometry::SharedPtr msg) {
-    // Obtener la velocidad x y y
-    x = msg->twist.twist.linear.x;
-    y = msg->twist.twist.linear.y;
+    // Obtener la posición x y y
+    x = msg->pose.pose.position.x;
+    y = msg->pose.pose.position.y;
 
-    x_ang = msg->twist.twist.angular.x;
-    y_ang = msg->twist.twist.angular.y;
-    z_ang = msg->twist.twist.angular.z;
+    // Obtener la orientación como cuaternión
+    geometry_msgs::msg::Quaternion orientation = msg->pose.pose.orientation;
 
+    // Convertir cuaternión a ángulos de Euler
+    tf2::Quaternion quat;
+    tf2::convert(orientation, quat);
+    double roll, pitch, yaw;
+    tf2::Matrix3x3(quat).getRPY(roll, pitch, yaw);
+
+    // Obtener el ángulo en grados y mostrarlo
+    ang = yaw * 180.0 / M_PI;
+
+    std::cout << "\tx: " << x << std::endl;
+    std::cout << "\ty: " << y << std::endl;
+    std::cout << "\tAngulo: " << ang << std::endl;
 }
 
 
@@ -41,19 +50,18 @@ int main(int argc, char * argv[])
   rclcpp::WallRate loop_rate(500ms);
 
   bool flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0;
-
+  float error = 0.7;
 
   while (rclcpp::ok() and flag1) {
-    goal_pose_message.pose.position.x = 0;
-    goal_pose_message.pose.position.y = 5;
+    goal_pose_message.pose.position.x = 1;
+    goal_pose_message.pose.position.y = 1;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag1 = 0;
       flag2 = 1;
     }
@@ -70,9 +78,8 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.y = 1;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag2 = 0;
       flag3 = 1;
     }
@@ -89,9 +96,8 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.y = 1;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag3 = 0;
       flag4 = 1;
     }
@@ -108,9 +114,8 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.y = 1;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+    if ((1 - error < x and x <  1 + error) and ( 1 - error < y and y < 1 + error)){
       flag4 = 0;
     }
     publisher->publish(goal_pose_message);
