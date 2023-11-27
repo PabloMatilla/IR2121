@@ -44,8 +44,8 @@ int main(int argc, char * argv[])
 
 
   while (rclcpp::ok() and flag1) {
-    goal_pose_message.pose.position.x = 0;
-    goal_pose_message.pose.position.y = 5;
+    goal_pose_message.pose.position.x = -7.95;
+    goal_pose_message.pose.position.y = 3.12;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
@@ -63,8 +63,8 @@ int main(int argc, char * argv[])
   }
 
   while (rclcpp::ok() and flag2) {
-    goal_pose_message.pose.position.x = 1;
-    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.x = -15.69;
+    goal_pose_message.pose.position.y = 32.3366;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
@@ -82,8 +82,8 @@ int main(int argc, char * argv[])
   }
 
   while (rclcpp::ok() and flag3) {
-    goal_pose_message.pose.position.x = 1;
-    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.x = -8.74;
+    goal_pose_message.pose.position.y = 41.89;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
@@ -101,8 +101,8 @@ int main(int argc, char * argv[])
   }
 
   while (rclcpp::ok() and flag4) {
-    goal_pose_message.pose.position.x = 1;
-    goal_pose_message.pose.position.y = 1;
+    goal_pose_message.pose.position.x = -0.06;
+    goal_pose_message.pose.position.y = 33.52;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 1;
     goal_pose_message.pose.orientation.y = 1;
