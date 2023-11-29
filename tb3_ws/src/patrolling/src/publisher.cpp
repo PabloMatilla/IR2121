@@ -62,7 +62,6 @@ int main(int argc, char * argv[])
       flag1 = 0;
       flag2 = 1;
     }
-    publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
   }
@@ -87,44 +86,52 @@ int main(int argc, char * argv[])
       flag2 = 0;
       flag3 = 1;
     }
-    publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
   }
 
-  while (rclcpp::ok() and flag3) {
-    goal_pose_message.pose.position.x = -8.74;
-    goal_pose_message.pose.position.y = 41.89;
-    goal_pose_message.pose.position.z = 0;
-    goal_pose_message.pose.orientation.x = 1;
-    goal_pose_message.pose.orientation.y = 1;
-    goal_pose_message.pose.orientation.z = 0;
-    goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
+  std::cout << "Tercer goal" << std::endl;
+  goal_pose_message.pose.position.x = -8.74;
+  goal_pose_message.pose.position.y = 41.89;
+  goal_pose_message.pose.position.z = 0;
+  goal_pose_message.pose.orientation.x = 1;
+  goal_pose_message.pose.orientation.y = 1;
+  goal_pose_message.pose.orientation.z = 0;
+  goal_pose_message.pose.orientation.w = 1;
+  publisher->publish(goal_pose_message);
+  rclcpp::spin_some(node);
+  loop_rate.sleep();
+  sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+  while (rclcpp::ok() and flag3) {
+
+    if ((x == 0.001 and y == 0.001)){
+      std::cout << "Tercer bucle" << std::endl;
       flag3 = 0;
       flag4 = 1;
     }
-    publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
   }
 
-  while (rclcpp::ok() and flag4) {
-    goal_pose_message.pose.position.x = -0.06;
-    goal_pose_message.pose.position.y = 33.52;
-    goal_pose_message.pose.position.z = 0;
-    goal_pose_message.pose.orientation.x = 1;
-    goal_pose_message.pose.orientation.y = 1;
-    goal_pose_message.pose.orientation.z = 0;
-    goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
+  std::cout << "Cuarto bucle" << std::endl;
+  goal_pose_message.pose.position.x = -0.06;
+  goal_pose_message.pose.position.y = 33.52;
+  goal_pose_message.pose.position.z = 0;
+  goal_pose_message.pose.orientation.x = 1;
+  goal_pose_message.pose.orientation.y = 1;
+  goal_pose_message.pose.orientation.z = 0;
+  goal_pose_message.pose.orientation.w = 1;
+  publisher->publish(goal_pose_message);
+  rclcpp::spin_some(node);
+  loop_rate.sleep();
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+  while (rclcpp::ok() and flag4) {
+
+    if ((x == 0.001 and y == 0.001)){
+      std::cout << "Cuarto bucle" << std::endl;
       flag4 = 0;
     }
-    publisher->publish(goal_pose_message);
     rclcpp::spin_some(node);
     loop_rate.sleep();
   }
