@@ -42,18 +42,23 @@ int main(int argc, char * argv[])
 
   bool flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0;
 
+  std::cout << "Primer goal" << std::endl;
+  goal_pose_message.pose.position.x = -7.95;
+  goal_pose_message.pose.position.y = 3.12;
+  goal_pose_message.pose.position.z = 0;
+  goal_pose_message.pose.orientation.x = 1;
+  goal_pose_message.pose.orientation.y = 1;
+  goal_pose_message.pose.orientation.z = 0;
+  goal_pose_message.pose.orientation.w = 1;
+  publisher->publish(goal_pose_message);
+  rclcpp::spin_some(node);
+  loop_rate.sleep();
+  sleep(1);
 
   while (rclcpp::ok() and flag1) {
-    goal_pose_message.pose.position.x = -7.95;
-    goal_pose_message.pose.position.y = 3.12;
-    goal_pose_message.pose.position.z = 0;
-    goal_pose_message.pose.orientation.x = 1;
-    goal_pose_message.pose.orientation.y = 1;
-    goal_pose_message.pose.orientation.z = 0;
-    goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+    if ((x == 0.001 and y == 0.001)){
+      std::cout << "Primer bucle" << std::endl;
       flag1 = 0;
       flag2 = 1;
     }
@@ -62,17 +67,23 @@ int main(int argc, char * argv[])
     loop_rate.sleep();
   }
 
-  while (rclcpp::ok() and flag2) {
-    goal_pose_message.pose.position.x = -15.69;
-    goal_pose_message.pose.position.y = 32.3366;
-    goal_pose_message.pose.position.z = 0;
-    goal_pose_message.pose.orientation.x = 1;
-    goal_pose_message.pose.orientation.y = 1;
-    goal_pose_message.pose.orientation.z = 0;
-    goal_pose_message.pose.orientation.w = 1;
-    sleep(1);
+  std::cout << "Segundo goal" << std::endl;
+  goal_pose_message.pose.position.x = -15.69;
+  goal_pose_message.pose.position.y = 32.3366;
+  goal_pose_message.pose.position.z = 0;
+  goal_pose_message.pose.orientation.x = 1;
+  goal_pose_message.pose.orientation.y = 1;
+  goal_pose_message.pose.orientation.z = 0;
+  goal_pose_message.pose.orientation.w = 1;
+  publisher->publish(goal_pose_message);
+  rclcpp::spin_some(node);
+  loop_rate.sleep();
+  sleep(1);
 
-    if ((x == 0.001 and y == 0.001) and ( x_ang == 0.001 and y_ang == 0.001 and z_ang == 0.001)){
+  while (rclcpp::ok() and flag2) {
+
+    if ((x == 0.001 and y == 0.001)){
+      std::cout << "Segundo bucle" << std::endl;
       flag2 = 0;
       flag3 = 1;
     }
