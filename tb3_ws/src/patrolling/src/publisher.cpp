@@ -67,18 +67,23 @@ int main(int argc, char * argv[])
 
   std::cout << "Primer goal" << std::endl;
 
+  
   while (rclcpp::ok() and flag1) {
-      goal_pose_message.pose.position.x = 0.17; //-7.95;
-      goal_pose_message.pose.position.y = 6.44; //3.12;
-      goal_pose_message.pose.position.z = 0;
-      goal_pose_message.pose.orientation.x = 0;
-      goal_pose_message.pose.orientation.y = 0;
-      goal_pose_message.pose.orientation.z = 0;
-      goal_pose_message.pose.orientation.w = 1;
-      publisher->publish(goal_pose_message);
-      sleep(10);
 
-    if ((Vx == 0.001 and Vy == 0.001)){
+    goal_pose_message.pose.position.x = 0.17; //-7.95;
+    goal_pose_message.pose.position.y = 6.44; //3.12;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 0;
+    goal_pose_message.pose.orientation.y = 0;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+    publisher->publish(goal_pose_message);
+    sleep(3);
+
+    std::cout << "Vx: " << Vx << std::endl;
+    std::cout << "Vy: " << Vy << std::endl;
+
+    if ((Vx == 0.01 and Vy == 0.01)){
       std::cout << "Primer bucle" << std::endl;
       flag1 = 0;
       flag2 = 1;
@@ -90,17 +95,15 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok() and flag2) {
   
-  goal_pose_message.pose.position.x = -2.8;// -15.69;
-  goal_pose_message.pose.position.y = 0.44; //32.3366;
-  goal_pose_message.pose.position.z = 0;//0;
-  goal_pose_message.pose.orientation.x = 0;
-  goal_pose_message.pose.orientation.y = 0;
-  goal_pose_message.pose.orientation.z = 0;
-  goal_pose_message.pose.orientation.w = 1;
-  publisher->publish(goal_pose_message);
-  rclcpp::spin_some(node);
-  loop_rate.sleep();
-  sleep(10);
+    goal_pose_message.pose.position.x = -2.8;// -15.69;
+    goal_pose_message.pose.position.y = 1.25; //32.3366;
+    goal_pose_message.pose.position.z = 0;//0;
+    goal_pose_message.pose.orientation.x = 0;
+    goal_pose_message.pose.orientation.y = 0;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+    publisher->publish(goal_pose_message);
+    sleep(3);
 
     if ((Vx == 0.001 and Vy == 0.001)){
       std::cout << "Segundo bucle" << std::endl;
@@ -112,19 +115,18 @@ int main(int argc, char * argv[])
   }
 
   std::cout << "Tercer goal" << std::endl;
-  goal_pose_message.pose.position.x = -8.74;
-  goal_pose_message.pose.position.y = 41.89;
-  goal_pose_message.pose.position.z = 0;
-  goal_pose_message.pose.orientation.x = 1;
-  goal_pose_message.pose.orientation.y = 1;
-  goal_pose_message.pose.orientation.z = 0;
-  goal_pose_message.pose.orientation.w = 1;
-  publisher->publish(goal_pose_message);
-  rclcpp::spin_some(node);
-  loop_rate.sleep();
-  sleep(1);
 
   while (rclcpp::ok() and flag3) {
+
+    goal_pose_message.pose.position.x = 10.09; //-8.74;
+    goal_pose_message.pose.position.y = -1.91; //41.89;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 0;
+    goal_pose_message.pose.orientation.y = 0;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+    publisher->publish(goal_pose_message);
+    sleep(3);
 
     if ((Vx == 0.001 and Vy == 0.001)){
       std::cout << "Tercer bucle" << std::endl;
@@ -136,18 +138,18 @@ int main(int argc, char * argv[])
   }
 
   std::cout << "Cuarto bucle" << std::endl;
-  goal_pose_message.pose.position.x = -0.06;
-  goal_pose_message.pose.position.y = 33.52;
-  goal_pose_message.pose.position.z = 0;
-  goal_pose_message.pose.orientation.x = 1;
-  goal_pose_message.pose.orientation.y = 1;
-  goal_pose_message.pose.orientation.z = 0;
-  goal_pose_message.pose.orientation.w = 1;
-  publisher->publish(goal_pose_message);
-  rclcpp::spin_some(node);
-  loop_rate.sleep();
 
   while (rclcpp::ok() and flag4) {
+
+    goal_pose_message.pose.position.x = 5.14; // -0.06;
+    goal_pose_message.pose.position.y = 5.36; //33.52;
+    goal_pose_message.pose.position.z = 0;
+    goal_pose_message.pose.orientation.x = 0;
+    goal_pose_message.pose.orientation.y = 0;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+    publisher->publish(goal_pose_message);
+    sleep(3);
 
     if ((Vx == 0.001 and Vy == 0.001)){
       std::cout << "Cuarto bucle" << std::endl;
