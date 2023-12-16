@@ -62,18 +62,19 @@ int main(int argc, char * argv[])
   double a, b;
 
   std::cout << "Primer goal" << std::endl;
-
-  goal_pose_message.pose.position.x = a = -2.8;// -15.69;
-  goal_pose_message.pose.position.y = b = 1.25; //32.3366;
-  goal_pose_message.pose.position.z = 0;//0;
-  goal_pose_message.pose.orientation.x = 0;
-  goal_pose_message.pose.orientation.y = 0;
-  goal_pose_message.pose.orientation.z = 0;
-  goal_pose_message.pose.orientation.w = 1;
-  publisher->publish(goal_pose_message);
-  sleep(4); rclcpp::spin_some(node);
   
   while (rclcpp::ok() and flag1) {
+
+    goal_pose_message.pose.position.x = a = -2.8;// -15.69;
+    goal_pose_message.pose.position.y = b = 1.25; //32.3366;
+    goal_pose_message.pose.position.z = 0;//0;
+    goal_pose_message.pose.orientation.x = 0;
+    goal_pose_message.pose.orientation.y = 0;
+    goal_pose_message.pose.orientation.z = 0;
+    goal_pose_message.pose.orientation.w = 1;
+    publisher->publish(goal_pose_message);
+    sleep(4); rclcpp::spin_some(node);
+
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
       flag1 = 0;
       flag2 = 1;
@@ -93,11 +94,8 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.y = 0;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
-    
     publisher->publish(goal_pose_message);
-    sleep(4);
-    rclcpp::spin_some(node);
-    loop_rate.sleep();
+    sleep(4); rclcpp::spin_some(node);
    
 
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
@@ -133,8 +131,8 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok() and flag4) {
 
-    goal_pose_message.pose.position.x = 1.62; // -0.06;
-    goal_pose_message.pose.position.y = 6.08; //33.52;
+    goal_pose_message.pose.position.x = a = 1.62; // -0.06;
+    goal_pose_message.pose.position.y = b = 6.08; //33.52;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
@@ -145,6 +143,10 @@ int main(int argc, char * argv[])
     sleep(4);
     rclcpp::spin_some(node);
     loop_rate.sleep();
+
+    if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
+      flag4 = 0;
+    }
   }
   
 
