@@ -16,11 +16,12 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
 
 
 
 add_executable(publisher src/publisher.cpp)
-ament_target_dependencies(publisher rclcpp std_msgs geometry_msgs nav_msgs)
+ament_target_dependencies(publisher rclcpp std_msgs geometry_msgs nav_msgs tf2_ros)
 
 
 
