@@ -52,38 +52,34 @@ int main(int argc, char * argv[])
   auto subscription2 = node->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>("/amcl_pose", 10, topic_callback2);
 
   auto publisher = node->create_publisher<geometry_msgs::msg::PoseStamped>("/goal_pose", 10);
+
   geometry_msgs::msg::PoseStamped goal_pose_message;
-  
   rclcpp::WallRate loop_rate(500ms);
-  rclcpp::spin_some(node);
-  loop_rate.sleep();
+
 
   bool flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0;
 
   double a, b;
 
   std::cout << "Primer goal" << std::endl;
+
+  goal_pose_message.pose.position.x = a = -2.8;// -15.69;
+  goal_pose_message.pose.position.y = b = 1.25; //32.3366;
+  goal_pose_message.pose.position.z = 0;//0;
+  goal_pose_message.pose.orientation.x = 0;
+  goal_pose_message.pose.orientation.y = 0;
+  goal_pose_message.pose.orientation.z = 0;
+  goal_pose_message.pose.orientation.w = 1;
+  publisher->publish(goal_pose_message);
+  sleep(4); rclcpp::spin_some(node);
   
   while (rclcpp::ok() and flag1) {
-
-    goal_pose_message.pose.position.x = a = -2.8;// -15.69;
-    goal_pose_message.pose.position.y = b = 1.25; //32.3366;
-    goal_pose_message.pose.position.z = 0;//0;
-    goal_pose_message.pose.orientation.x = 0;
-    goal_pose_message.pose.orientation.y = 0;
-    goal_pose_message.pose.orientation.z = 0;
-    goal_pose_message.pose.orientation.w = 1;
-
-   publisher->publish(goal_pose_message);
-   sleep(4);
-   rclcpp::spin_some(node);
-   loop_rate.sleep();
- 
-
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
       flag1 = 0;
       flag2 = 1;
     }
+    rclcpp::spin_some(node);
+    loop_rate.sleep();
   }
 
    std::cout << "Segundo goal" << std::endl;
