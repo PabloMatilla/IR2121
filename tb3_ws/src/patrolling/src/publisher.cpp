@@ -18,7 +18,7 @@ double Vx, Vy;
 double x, y;
 
 double Vo = 4.000e-06;
-double error = 0.7;
+double error = 5; //  2;
 
 
 
@@ -57,10 +57,10 @@ int main(int argc, char * argv[])
   std::cout << "Primer goal" << std::endl;
   
   while (rclcpp::ok() and flag1) {
-
-    goal_pose_message.pose.position.x = a = -2.8;// -15.69;
-    goal_pose_message.pose.position.y = b = 1.25; //32.3366;
-    goal_pose_message.pose.position.z = 0;//0;
+                                      // laboratory    house_simulation
+    goal_pose_message.pose.position.x = a = -24.73; //  -2.8;
+    goal_pose_message.pose.position.y = b =  -8.78; //  1.25; 
+    goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
     goal_pose_message.pose.orientation.z = 0;
@@ -93,8 +93,8 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok() and flag2) {
   
-    goal_pose_message.pose.position.x = a = 5.14; // -0.06;
-    goal_pose_message.pose.position.y = b = 5.36; //33.52;
+    goal_pose_message.pose.position.x = a = -28.50;  //  5.14; 
+    goal_pose_message.pose.position.y = b = -20.83;  //  5.36; 
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
@@ -112,6 +112,9 @@ int main(int argc, char * argv[])
 
    x = - transformStamped.transform.translation.x;
    y = - transformStamped.transform.translation.y;
+
+   std::cout << "a: " << a << "     x: "    << x << std::endl;
+   std::cout << "b: " << b << "     y: "    << y << std::endl;
    
 
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
@@ -124,8 +127,8 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok() and flag3) {
 
-    goal_pose_message.pose.position.x = a = 10.09; //-8.74;
-    goal_pose_message.pose.position.y = b = -1.91; //41.89;
+    goal_pose_message.pose.position.x = a =  -20.24; //   10.09;
+    goal_pose_message.pose.position.y = b =  -22.23; //  -1.91;
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
@@ -148,6 +151,9 @@ int main(int argc, char * argv[])
    x = - transformStamped.transform.translation.x;
    y = - transformStamped.transform.translation.y;
 
+   std::cout << "a: " << a << "     x: "    << x << std::endl;
+   std::cout << "b: " << b << "     y: "    << y << std::endl;
+
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
       flag3 = 0;
       flag4 = 1;
@@ -158,8 +164,8 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok() and flag4) {
 
-    goal_pose_message.pose.position.x = a = 1.62; // -0.06;
-    goal_pose_message.pose.position.y = b = 6.08; //33.52;
+    goal_pose_message.pose.position.x = a = -24.73; //  1.62; 
+    goal_pose_message.pose.position.y = b = -20.83;  //  5.36;6.08; 
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
@@ -179,6 +185,9 @@ int main(int argc, char * argv[])
        }
     x = - transformStamped.transform.translation.x;
     y = - transformStamped.transform.translation.y;
+
+    std::cout << "a: " << a << "     x: "    << x << std::endl;
+    std::cout << "b: " << b << "     y: "    << y << std::endl;
 
     if (((Vx < Vo) and (Vy < Vo) and (Vx != 0)) and (((a - error) < x) and (x < (a + error))) and (((b - error) < y) and (y < (b + error)))){
       flag4 = 0;
