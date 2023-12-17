@@ -165,13 +165,14 @@ int main(int argc, char * argv[])
   while (rclcpp::ok() and flag4) {
 
     goal_pose_message.pose.position.x = a = -24.73; //  1.62; 
-    goal_pose_message.pose.position.y = b = -20.83;  //  5.36;6.08; 
+    goal_pose_message.pose.position.y = b = -8.78;  //  6.08; 
     goal_pose_message.pose.position.z = 0;
     goal_pose_message.pose.orientation.x = 0;
     goal_pose_message.pose.orientation.y = 0;
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
     publisher->publish(goal_pose_message);
+    flag4 = 0;
     sleep(4);
     rclcpp::spin_some(node);
     loop_rate.sleep();
