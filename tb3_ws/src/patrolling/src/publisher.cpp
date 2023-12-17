@@ -172,7 +172,6 @@ int main(int argc, char * argv[])
     goal_pose_message.pose.orientation.z = 0;
     goal_pose_message.pose.orientation.w = 1;
     publisher->publish(goal_pose_message);
-    flag4 = 0;
     sleep(4);
     rclcpp::spin_some(node);
     loop_rate.sleep();
